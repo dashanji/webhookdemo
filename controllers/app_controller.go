@@ -20,11 +20,11 @@ import (
 	"context"
 	appv1 "github.com/dashanji/webhookdemo/api/v1"
 	"github.com/go-logr/logr"
-	//appsv1 "k8s.io/api/apps/v1"
-	//"k8s.io/apimachinery/pkg/api/errors"
-	//metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	appsv1 "k8s.io/api/apps/v1"
+	"k8s.io/apimachinery/pkg/api/errors"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	//"k8s.io/apimachinery/pkg/runtime"
-	//"k8s.io/apimachinery/pkg/types"
+	"k8s.io/apimachinery/pkg/types"
 	//"reflect"
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
@@ -39,13 +39,14 @@ type AppReconciler struct {
 
 // +kubebuilder:rbac:groups=app.rjscy.cn,resources=apps,verbs=get;list;watch;create;update;patch;delete
 // +kubebuilder:rbac:groups=app.rjscy.cn,resources=apps/status,verbs=get;update;patch
+// +kubebuilder:rbac:groups=apps,resources=deployments,verbs=get;list;watch;create;update;delete
 
 func (r *AppReconciler) Reconcile(req ctrl.Request) (ctrl.Result, error) {
 	_ = context.Background()
 	_ = r.Log.WithValues("app", req.NamespacedName)
 
 	// your logic here
-	/*instance := &appv1.App{}
+	instance := &appv1.App{}
 	err := r.Get(context.TODO(), req.NamespacedName, instance)
 	if err != nil {
 		if errors.IsNotFound(err) {
@@ -76,11 +77,6 @@ func (r *AppReconciler) Reconcile(req ctrl.Request) (ctrl.Result, error) {
 		},
 		Spec: deploySpec,
 	}
-	//scheme := runtime.Scheme{}
-	//if err := controllerutil.SetControllerReference(instance, deploy, &scheme); err != nil {
-	//	r.Log.Error(err, "Set DeployVersion CtlRef Error")
-	//	return ctrl.Result{}, err
-	//}
 
 	found := &appsv1.Deployment{}
 	err = r.Get(context.TODO(), types.NamespacedName{Name: deploy.Name, Namespace: deploy.Namespace}, found)
@@ -90,7 +86,7 @@ func (r *AppReconciler) Reconcile(req ctrl.Request) (ctrl.Result, error) {
 		if err = r.Create(context.TODO(), deploy); err != nil {
 			return ctrl.Result{}, err
 		}
-	} else if err != nil {
+	} /*else if err != nil {
 		r.Log.Error(err, "Get Deployment info Error", "namespace", deploy.Namespace, "name", deploy.Name)
 		return ctrl.Result{}, err
 	} else if !reflect.DeepEqual(deploy.Spec, found.Spec) {

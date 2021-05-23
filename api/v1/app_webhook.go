@@ -17,7 +17,7 @@ limitations under the License.
 package v1
 
 import (
-	//core "k8s.io/api/core/v1"
+	core "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	ctrl "sigs.k8s.io/controller-runtime"
 	logf "sigs.k8s.io/controller-runtime/pkg/log"
@@ -44,7 +44,7 @@ func (r *App) Default() {
 	applog.Info("default", "name", r.Name)
 
 	// TODO(user): fill in your defaulting logic.
-	/*var cns []core.Container
+	var cns []core.Container
 	cns = r.Spec.Deploy.Template.Spec.Containers
 
 	container := core.Container{
@@ -53,7 +53,7 @@ func (r *App) Default() {
 	}
 
 	cns = append(cns, container)
-	r.Spec.Deploy.Template.Spec.Containers = cns*/
+	r.Spec.Deploy.Template.Spec.Containers = cns
 	applog.Info("Default end!")
 }
 

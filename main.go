@@ -28,7 +28,7 @@ import (
 
 	appv1 "github.com/dashanji/webhookdemo/api/v1"
 	"github.com/dashanji/webhookdemo/controllers"
-	"sigs.k8s.io/controller-runtime/pkg/webhook"
+	//"sigs.k8s.io/controller-runtime/pkg/webhook"
 	// +kubebuilder:scaffold:imports
 )
 
@@ -80,8 +80,8 @@ func main() {
 		os.Exit(1)
 	}
 	// +kubebuilder:scaffold:builder
-	hookServer := mgr.GetWebhookServer()
-	hookServer.Register("mutate-pod", &webhook.Admission{Handler: &podMutate{Client: mgr.GetClient()}})
+	//hookServer := mgr.GetWebhookServer()
+	//hookServer.Register("mutate-pod", &webhook.Admission{Handler: &appv1.PodMutate{Client: mgr.GetClient()}})
 
 	setupLog.Info("starting manager")
 	if err := mgr.Start(ctrl.SetupSignalHandler()); err != nil {
