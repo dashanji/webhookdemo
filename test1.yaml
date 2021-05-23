@@ -1,0 +1,13 @@
+apiVersion: app.rjscy.cn/v1
+kind: App
+metadata:
+  name: hello
+spec:
+  template:
+    # 这里是 Pod 模版
+    spec:
+      containers:
+      - name: hello
+        image: busybox
+        command: ['sh', '-c', 'echo "Hello, Kubernetes!" && sleep 3600']
+      restartPolicy: OnFailure

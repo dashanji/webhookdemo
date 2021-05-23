@@ -1,0 +1,7 @@
+domain: rjscy.cn
+repo: github.com/dashanji/webhookdemo
+resources:
+- group: app
+  kind: App
+  version: v1
+version: "2"
