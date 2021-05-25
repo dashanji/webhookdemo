@@ -2,7 +2,7 @@
 
 #### 说明
 
-本文项目基于https://github.com/zwwhdls/KubeAdmissionWebhookDemo。
+本文项目基于https://github.com/zwwhdls/KubeAdmissionWebhookDemo
 
 主要实现了一个向pod注入nginx容器的webhook。
 
